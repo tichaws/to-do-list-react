@@ -73,7 +73,8 @@ body ,html {
 }
 
 .paddingTop10{
-  padding-top: 10px
+  padding-top: 10px;
+  text-align: left;
 }
 
 span {

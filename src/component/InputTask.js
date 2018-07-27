@@ -1,12 +1,11 @@
 import React from 'react';
 import { Button, Col, FormGroup, FormControl } from 'react-bootstrap';
-import DetailTask from './DetailTask'
 import { Modal, ListGroup, ListGroupItem } from 'react-bootstrap';
-import detail from './img/detail.png';
-import cancle from './img/cancle.png';
 import success from './img/blank-check-box.png';
 import checkbox from './img/check-box.png';
 import clear from './img/delete.png';
+import add from './img/add.png';
+import './component.css';
 
 class InputTask extends React.Component {
     constructor(props) {
@@ -97,9 +96,7 @@ class InputTask extends React.Component {
                         </form>
                     </Col>
                     <Col xs={2} md={2} className="paddingTop10">
-                        <Button type="submit" bsStyle="success" bsSize="small" onClick={this.handleClick}>
-                            Add
-						</Button>
+                        <img src={add} className="check-box cursor" onClick={this.handleClick} />
                     </Col>
                     <Col xs={12} md={12}>
                         <div className="display-list">
