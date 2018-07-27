@@ -1,0 +1,37 @@
+img {
+    /* animation: logo-rolate  infinite 20s linear; */
+    height: 30px;
+}
+
+.font-size-20{
+    font-size: 20px
+}
+
+.no-padding{
+    padding: 0px;
+}
+
+.clear{
+    /* animation: logo-rolate  infinite 20s linear; */
+    height: 6px; 
+    float: right;
+    cursor: pointer;
+}
+
+.check-box {
+    margin-top: 3px;
+}
+
+.size-check-box{
+    height: 10px;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.title-deails {
+    padding: 0px;
+    text-align: left;
+    margin-top: 7px;
+}

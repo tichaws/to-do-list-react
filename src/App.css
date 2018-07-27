@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css?family=Dosis");
+body ,html {
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: auto;
+
+}
+
+.containner{
+  top: 30px;
+  padding-top: 15px;
+ margin-right: auto;
+ margin-left: auto;
+ padding-left: 15px;
+ padding-right: 15px;
+}
+
+.panel{
+  margin-bottom: 30px;
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.row{
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.row:before,
+.row:after{
+  content: " ";
+  display: table;
+}
+
+.row:after{
+  clear: both;
+}
+
+.App {
+  text-align: center;
+
+}
+
+.App-logo {
+  /* animation: logo-rolate  infinite 20s linear; */
+  height: 60px;
+}
+
+.App-header {
+  height: 150px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+  font-family: "Dosis";
+  color: black;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes logo-rolate {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+.paddingTop10{
+  padding-top: 10px
+}
+
+span {
+  font-size: 8px;
+  color:grey;
+}
