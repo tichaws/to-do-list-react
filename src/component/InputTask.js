@@ -75,8 +75,8 @@ class InputTask extends React.Component {
 
     getKey() {
         console.log(this.state.keyCount)
-        return this.state.keyCount++;
-
+        this.setState({ keyCount : this.state.keyCount+1 });
+        return this.state.keyCount;
     }
 
     render() {
@@ -126,7 +126,7 @@ class InputTask extends React.Component {
                         </form>
                     </Col>
                     <Col xs={12} md={2} className="paddingTop10">
-                        <img src={add} className="check-box cursor" onClick={this.handleClick} />
+                        <img src={add} alt="Add Task"  className="check-box cursor" onClick={this.handleClick} />
                     </Col>
                     <Col xs={12} md={12}>
                         <div className="display-list">
@@ -139,11 +139,11 @@ class InputTask extends React.Component {
                                     {this.state.list.map((list, index) => (
                                         <ListGroupItem key={index} bsStyle="info" className="row">
                                             <Col xs={1} md={1} className="check-box cursor">
-                                                <img src={success} className="size-check-box" onClick={() => this.endTask(list.id)} />
+                                                <img src={success} alt="Check to Done" className="size-check-box" onClick={() => this.endTask(list.id)} />
                                             </Col>
                                             <Col xs={9} md={10} className="font-size-20 cursor" onClick={() => this.setState({ show: true ,titleupdate:list.title,taskupdate:list.text,idupdate:list.id,dateupdate:list.date })} >{list.title}</Col>
 
-                                            <img src={clear} className="clear" onClick={() => this.removeTask(list.id)} />
+                                            <img src={clear} alt="Click to Remove" className="clear" onClick={() => this.removeTask(list.id)} />
                                             <div className="modal-container">
                                                 <Modal
                                                     show={this.state.show}
@@ -265,9 +265,9 @@ class InputTask extends React.Component {
                                         <ListGroupItem bsStyle="success" key={index} className="row">
 
                                             <Col xs={1} md={1} className="check-box">
-                                                <img src={checkbox} className="size-check-box cursor"  onClick={() => this.undoTask(done.id)}/></Col>
+                                                <img src={checkbox} alt="Click to Do List"  className="size-check-box cursor"  onClick={() => this.undoTask(done.id)}/></Col>
                                             <Col xs={9} md={10} className="font-size-20" >{done.title}</Col>
-                                            <img src={clear} className="clear" onClick={() => this.clearTask(done.id)} />
+                                            <img src={clear} alt="Click to Remove"  className="clear" onClick={() => this.clearTask(done.id)} />
 
                                         </ListGroupItem>
                                     ))}
