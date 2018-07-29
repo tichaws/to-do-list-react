@@ -9,3 +9,6 @@ Assignment To Do List
 npm start to run .
 
 - release 1 20180728 [EndFlow] 
+- release 2 20180729 [Update Flow] 
+
+- Browser Support is Google Chrome 
