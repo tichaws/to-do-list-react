@@ -44,7 +44,6 @@ class InputTask extends React.Component {
                     }
                 }
             }
-            console.log(this.state.keyCount);
         }
 
         if (null !== todo && todo !== [] && todo !== '' && JSON.parse(todo).length !== 0) {
@@ -66,15 +65,12 @@ class InputTask extends React.Component {
                     }
                 }
             }           
-            console.log(this.state.keyCount);
-        }
 
+        }
         this.state.keyCount++;                  
-        console.log(this.state.keyCount);
     }
 
     getKey() {
-        console.log(this.state.keyCount)
         this.setState({ keyCount : this.state.keyCount+1 });
         return this.state.keyCount;
     }
@@ -291,15 +287,13 @@ class InputTask extends React.Component {
     handleUpdate() {
         var today = new Date()
 
-        console.log("id update : "+this.state.idupdate)
+        // console.log("id update : "+this.state.idupdate)
         let newList = [];
         this.state.list.forEach(element => {
             if (element.id !== this.state.idupdate) {
-                console.log(element.id);
                 newList.push(element);
             }
             else{
-                console.log(1);
                 const updateTask = {
                     title: this.state.titleupdate,
                     text: this.state.taskupdate,
@@ -314,7 +308,6 @@ class InputTask extends React.Component {
         }, () => {
             localStorage.setItem("todo", JSON.stringify(this.state.list));
         });
-        console.log(this.state)
         this.handleHide()
     }
 
@@ -356,7 +349,7 @@ class InputTask extends React.Component {
             id: this.getKey(),
             date: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
         };
-        console.log(newTask)
+        // console.log(newTask)
         // var newList = this.state.list.concat(newTask);
         this.setState(prevState => ({
             list: prevState.list.concat(newTask),
