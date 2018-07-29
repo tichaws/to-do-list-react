@@ -21,7 +21,7 @@ class App extends Component {
 					<Row className="show-grid">
 						<Col xs={12} md={12}>
 							<div className="containner">
-								<Col xs={8} md={8} mdOffset={2} xsOffset={2}>
+								<Col xs={12} md={8} mdOffset={2} >
 									<div className="panel row">
 										<img src={tasks} className="App-logo" alt="tasks" />
 										<InputTask />

@@ -15,14 +15,16 @@ class InputTask extends React.Component {
             task: '',
             titleupdate: '',
             taskupdate: '',
+            idupdate:'',
+            dateupdate:'',
             list: [],
             done: [],
             update: [],
             show: false,
-            edit: false
+            edit: false,
+            keyCount:-1
         };
         this.handleHide = this.handleHide.bind(this);
-
         this.handleClick = this.handleClick.bind(this);
         this.getKey = this.getKey.bind(this);
 
@@ -31,22 +33,50 @@ class InputTask extends React.Component {
 
         if (null !== done && done !== [] && done !== '' && JSON.parse(done).length !== 0) {
             this.state.done = JSON.parse(done)
+            let len = this.state.done.length
+            for(let i=0;i<len;i++){
+                if(i===0){
+                    this.state.keyCount = this.state.done[i].id;
+                }
+                else{
+                    if(this.state.keyCount < this.state.done[i].id){
+                        this.state.keyCount = this.state.done[i].id;
+                    }
+                }
+            }
+            console.log(this.state.keyCount);
         }
 
         if (null !== todo && todo !== [] && todo !== '' && JSON.parse(todo).length !== 0) {
             this.state.list = JSON.parse(todo)
             let len = this.state.list.length
-            this.keyCount = this.state.list[len - 1].id + 1
-        }
-        else {
-            this.state.list = [];
-            this.keyCount = 0;
+            for(let i=0;i<len;i++){
+                if(i===0){
+                    if(this.state.list === []){
+                        this.state.keyCount = this.state.list[i].id;
+                    }else{
+                        if(this.state.keyCount < this.state.list[i].id){
+                            this.state.keyCount = this.state.list[i].id;
+                        } 
+                    }
+                }
+                else{
+                    if(this.state.keyCount < this.state.list[i].id){
+                        this.state.keyCount = this.state.list[i].id;
+                    }
+                }
+            }           
+            console.log(this.state.keyCount);
         }
 
+        this.state.keyCount++;                  
+        console.log(this.state.keyCount);
     }
 
     getKey() {
-        return this.keyCount++;
+        console.log(this.state.keyCount)
+        return this.state.keyCount++;
+
     }
 
     render() {
@@ -56,7 +86,7 @@ class InputTask extends React.Component {
                     <h2> ADD Task </h2>
                     <h5> Add Title and Discription task to the list </h5>
                     <hr></hr>
-                    <Col xs={8} md={8} mdOffset={2} xsOffset={2}>
+                    <Col xs={12} md={8} mdOffset={2} >
                         <form>
                             <FormGroup controlId="formBasicText" >
 
@@ -75,7 +105,7 @@ class InputTask extends React.Component {
                             </FormGroup>
                         </form>
                     </Col>
-                    <Col xs={8} md={8} mdOffset={2} xsOffset={2}>
+                    <Col xs={12} md={8} mdOffset={2} >
                         <form>
                             <FormGroup controlId="formBasicText" >
 
@@ -95,7 +125,7 @@ class InputTask extends React.Component {
                             </FormGroup>
                         </form>
                     </Col>
-                    <Col xs={2} md={2} className="paddingTop10">
+                    <Col xs={12} md={2} className="paddingTop10">
                         <img src={add} className="check-box cursor" onClick={this.handleClick} />
                     </Col>
                     <Col xs={12} md={12}>
@@ -103,7 +133,7 @@ class InputTask extends React.Component {
                             <h2> TODO Task </h2>
                             <h5>{this.state.list.length} Task</h5>
                             <h6> Click title task to more details and update details.</h6>
-                            <Col xs={8} md={8} mdOffset={2} xsOffset={2}>
+                            <Col xs={12} md={8} mdOffset={2} >
 
                                 <ListGroup>
                                     {this.state.list.map((list, index) => (
@@ -111,7 +141,7 @@ class InputTask extends React.Component {
                                             <Col xs={1} md={1} className="check-box cursor">
                                                 <img src={success} className="size-check-box" onClick={() => this.endTask(list.id)} />
                                             </Col>
-                                            <Col xs={10} md={10} className="font-size-20 cursor" onClick={() => this.setState({ show: true ,titleupdate:list.title,taskupdate:list.text })} >{list.title}</Col>
+                                            <Col xs={9} md={10} className="font-size-20 cursor" onClick={() => this.setState({ show: true ,titleupdate:list.title,taskupdate:list.text,idupdate:list.id,dateupdate:list.date })} >{list.title}</Col>
 
                                             <img src={clear} className="clear" onClick={() => this.removeTask(list.id)} />
                                             <div className="modal-container">
@@ -137,7 +167,7 @@ class InputTask extends React.Component {
 
                                                                         <FormControl
                                                                             type="text"
-                                                                            value={list.id}
+                                                                            value={this.state.idupdate}
                                                                             disabled
                                                                         />
                                                                         <FormControl.Feedback />
@@ -156,7 +186,7 @@ class InputTask extends React.Component {
 
                                                                         <FormControl
                                                                             type="text"
-                                                                            value={list.date}
+                                                                            value={this.state.dateupdate}
                                                                             disabled
                                                                         />
                                                                         <FormControl.Feedback />
@@ -217,7 +247,7 @@ class InputTask extends React.Component {
                                                     </Modal.Body>
                                                     <Modal.Footer>
                                                         {/* <Button onClick={this.handleSave} edit={this.state.edit}>Save</Button> */}
-                                                        <Button onClick={() => this.handleUpdate(list)} >Update</Button>
+                                                        <Button onClick={() => this.handleUpdate()} >Update</Button>
                                                         <Button onClick={this.handleHide}>Close</Button>
                                                     </Modal.Footer>
                                                 </Modal>
@@ -226,7 +256,7 @@ class InputTask extends React.Component {
                                     ))}
                                 </ListGroup>
                             </Col>
-                            <Col xs={8} md={8} mdOffset={2} xsOffset={2}>
+                            <Col xs={12} md={8} mdOffset={2} >
                                 <h2> Task Done </h2>
                                 <h5>{this.state.done.length} Task</h5>
 
@@ -235,8 +265,8 @@ class InputTask extends React.Component {
                                         <ListGroupItem bsStyle="success" key={index} className="row">
 
                                             <Col xs={1} md={1} className="check-box">
-                                                <img src={checkbox} className="size-check-box" /></Col>
-                                            <Col xs={10} md={10} className="font-size-20" >{done.title}</Col>
+                                                <img src={checkbox} className="size-check-box cursor"  onClick={() => this.undoTask(done.id)}/></Col>
+                                            <Col xs={9} md={10} className="font-size-20" >{done.title}</Col>
                                             <img src={clear} className="clear" onClick={() => this.clearTask(done.id)} />
 
                                         </ListGroupItem>
@@ -255,23 +285,25 @@ class InputTask extends React.Component {
     }
 
     handleHide() {
-        this.setState({ show: false ,titleupdate:'',taskupdate:''});
+        this.setState({ show: false ,titleupdate:'',taskupdate:'',idupdate:'',dateupdate:'' });
     }
 
-    handleUpdate(list) {
+    handleUpdate() {
         var today = new Date()
 
-        console.log(list)
+        console.log("id update : "+this.state.idupdate)
         let newList = [];
         this.state.list.forEach(element => {
-            if (element.id !== list.id) {
+            if (element.id !== this.state.idupdate) {
+                console.log(element.id);
                 newList.push(element);
             }
             else{
+                console.log(1);
                 const updateTask = {
                     title: this.state.titleupdate,
                     text: this.state.taskupdate,
-                    id: list.id,
+                    id: this.state.idupdate,
                     date: today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
                 };
                 newList.push(updateTask);
@@ -292,22 +324,22 @@ class InputTask extends React.Component {
 
     onTaskChange = (event) => {
         this.setState({ task: event.target.value });
-        console.log("Task :" + event.target.value)
+        // console.log("Task :" + event.target.value)
     }
 
     onTaskUpdate = (event) => {
         this.setState({ taskupdate: event.target.value });
-        console.log("Task :" + event.target.value)
+        // console.log("Task :" + event.target.value)
     }
 
 
     onTitleChange = (event) => {
         this.setState({ title: event.target.value });
-        console.log("title :" + event.target.value)
+        // console.log("title :" + event.target.value)
     }
     onTitleUpdate = (event) => {
         this.setState({ titleupdate : event.target.value });
-        console.log("title :" + event.target.value)
+        // console.log("title :" + event.target.value)
     }
 
     handleClick(e) {
@@ -337,7 +369,7 @@ class InputTask extends React.Component {
     }
     handleKey(event) {
         if (event.key === 'Enter') {
-            this.handleClick(event);
+            // this.handleClick(event);
         }
     }
 
@@ -379,6 +411,26 @@ class InputTask extends React.Component {
             }
             if (element.id !== id) {
                 list.push(element);
+            }
+        });
+        this.setState({
+            list: list,
+            done: done
+        }, () => {
+            localStorage.setItem("todo", JSON.stringify(this.state.list));
+            localStorage.setItem("done", JSON.stringify(this.state.done));
+        });
+    }
+
+    undoTask(id) {
+        let list = this.state.list
+        let done = [];
+        this.state.done.forEach(element => {
+            if (element.id === id) {
+                list.push(element);
+            }
+            if (element.id !== id) {
+                done.push(element);
             }
         });
         this.setState({

@@ -28,6 +28,7 @@ img {
 
 .cursor {
     cursor: pointer;
+    word-wrap: break-word;
 }
 
 .title-deails {
